@@ -44,6 +44,7 @@ public:
   int blockSize;
   int turns;
   int score;
+  int printPart;
 
 public:
     Board(int player, int level, string levelFile);
