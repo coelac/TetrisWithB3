@@ -23,7 +23,7 @@ void printBlockRow(string block, int player) {
   }
 }
 
-void displayGame(Board *b1, Board *b2, int player) {
+void displayGame(shared_ptr<Board> b1, shared_ptr<Board> b2, int player) {
   // Print Header
   cout << "Level:    " << b1->levelNum; // correct num of spaces???
   cout << "          "; // correct num of spaces???
@@ -52,6 +52,8 @@ void displayGame(Board *b1, Board *b2, int player) {
     printBlockRow(b2->nextBlock->printBlock(), 2);
   }
 }
+
+//void swapPlayer(
 
 int main(int argc, char* argv[]) {
   string player1File = "sequence1.txt";
@@ -100,13 +102,14 @@ int main(int argc, char* argv[]) {
   }
 
   // Setup
-  Board *board1 = new Board(1, gameLevel, player1File);
-  Board *board2 = new Board(2, gameLevel, player2File);
+  shared_ptr<Board> board1 = make_shared<Board>(1, gameLevel, player1File);
+  shared_ptr<Board> board2 = make_shared<Board>(2, gameLevel, player2File);
 
   board1->setLevel();
   board2->setLevel();
-
-  Board *currentPlayer = board1;
+	
+  shared_ptr<Board> currentPlayer = board1;
+  shared_ptr<Board> otherPlayer = board2;
 
   int numWins1 = 0;
   int numWins2 = 0;
@@ -114,25 +117,13 @@ int main(int argc, char* argv[]) {
   // Gameloop
   while (true) {
     bool restart = false;
-
-    // Generate blocks based on level
-    //board1->currBlock = board1->getNextBlock();
-    //board2->currBlock = board2->getNextBlock();
-    //board1->nextBlock = board1->getNextBlock();
-    //board2->nextBlock = board2->getNextBlock();
-
-    //board1->getNextBlock();
-    //board2->getNextBlock();
-
+	  
     // User input loop
     while (true) {
       string cmd;
       cin >> cmd;
       
       int multiplier = 1;
-
-		board1->testPrint();
-      //displayGame(board1, board2, currentPlayer->getPlayer());
 
       if (cmd == "restart") {
         restart = true;
