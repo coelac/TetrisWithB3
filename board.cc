@@ -173,7 +173,7 @@ int Board::getTurns() {
 
 void Board::makeNewBlock() {
   if (newGame) {
-    nextBlockType = 'T';
+    nextBlockType = level->generateNextBlock();
     newGame = false;
   }
   blockType = nextBlockType;
@@ -184,7 +184,7 @@ void Board::makeNewBlock() {
   } else {
     lost = true;
   }
-  nextBlockType = 'T';
+  nextBlockType = level->generateNextBlock();;
 }
 
 bool Board::playerLost() {
