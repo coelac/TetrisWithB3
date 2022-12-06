@@ -13,11 +13,7 @@ Board::Board(int player, int level, string levelFile) : rows{18}, cols{11}, play
   makeNewBlock();
 }
 
-/*Board::~Board() {
-//  delete currBlock;
-//  delete nextBlock;
-  //delete level;
-}*/
+Board::~Board() {}
 
 int Board::getPlayer() {
   return player;
@@ -36,37 +32,14 @@ void Board::printRow(int row) {
 	}
 }
 
-
-
-/*
-void Board::print() {
-  cout << "Level:     " << levelNum << endl; // correct num of spaces???
-  cout << "Score:" << score << endl; // double digit score
-  cout << "-----------" << endl;
-
-  for (int r = 0; r <= rows; r++) {
-    for (int c = 0; c <= cols; c++) {
-      if (board[r][c].show && board[r][c].isOccupied) { board[r][c].print(); }
-      else { cout << " "; }
-    }
-  }
-  
-  cout << "-----------" << endl;
-  cout << "Next:" << endl;
-  //..nextBlock...; // what rotation will the next block be in?
-}
-*/
-
 void Board::deleteRow(int y) {
   board.erase(board.begin() + y); // y - 1?
   makeNewRow();
-  
   blockPartsPerRow.erase(blockPartsPerRow.begin() + y); // y - 1?
   blockPartsPerRow.push_back(0);
 }
 
 void Board::makeNewRow() {
-
   vector<Square> newRow;
   for (int i = 0; i < cols; ++i) {
     newRow.push_back(Square());
@@ -199,32 +172,6 @@ int Board::getTurns() {
   return turns;
 }
 
-/*
-unique_ptr<AbstractBlock> Board::getNextBlock() {
-  return nextBlock;
-}*/
-
-/*void Board::updateLevel(int level) {
-  levelNum = level;
-  switch (level) {
-    case 0:
-      currLevel = make_unique<LevelZero>();
-      break;
-    case 1:
-      currLevel = make_unique<LevelOne>();
-      break;
-    case 2:
-      currLevel = make_unique<LevelTwo>();
-      break;
-    case 3:
-      currLevel = make_unique<LevelThree>();
-      break;
-    case 5:
-      currLevel = make_unique<LevelFour>();
-      break;
-  }
-}*/
-
 void Board::makeNewBlock() {
   if (newGame) {
     nextBlockType = 'T';
@@ -260,6 +207,27 @@ void Board::setBlockType(char type, char replacedBlock) {
   }
 }
 
+/*void Board::updateLevel(int level) {
+  levelNum = level;
+  switch (level) {
+    case 0:
+      currLevel = make_unique<LevelZero>();
+      break;
+    case 1:
+      currLevel = make_unique<LevelOne>();
+      break;
+    case 2:
+      currLevel = make_unique<LevelTwo>();
+      break;
+    case 3:
+      currLevel = make_unique<LevelThree>();
+      break;
+    case 5:
+      currLevel = make_unique<LevelFour>();
+      break;
+  }
+}*/
+
 void Board::setLevel() {
   if (level != nullptr) delete level;
   
@@ -288,7 +256,6 @@ unique_ptr<AbstractBlock> Board::getNextBlock() {
 
   return make_unique<TBlock>(0, 0, 0);
 }
-
 
 void Board::testPrint() {
     int partNum = 0;
