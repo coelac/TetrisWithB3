@@ -72,6 +72,8 @@ void displayGame(shared_ptr<Board> b1, shared_ptr<Board> b2, int player) {
   }
 }
 
+//void swapPlayer(
+
 int main(int argc, char* argv[]) {
   string player1File = "sequence1.txt";
   string player2File = "sequence2.txt";
@@ -127,16 +129,7 @@ int main(int argc, char* argv[]) {
   // Gameloop
   while (true) {
     bool restart = false;
-
-    // Generate blocks based on level
-    //board1->currBlock = board1->getNextBlock();
-    //board2->currBlock = board2->getNextBlock();
-    //board1->nextBlock = board1->getNextBlock();
-    //board2->nextBlock = board2->getNextBlock();
-
-    //board1->getNextBlock();
-    //board2->getNextBlock();
-
+	  
     // User input loop
     while (true) {
       string cmd;
@@ -144,9 +137,12 @@ int main(int argc, char* argv[]) {
       
       int multiplier = 1;
 
+<<<<<<< HEAD
 		//board1->testPrint();
       displayGame(board1, board2, currentPlayer->getPlayer());
 
+=======
+>>>>>>> 723e9b595cb0f0b071feb88c601396abd217cc00
       if (cmd == "restart") {
         restart = true;
         //board1->reset();
