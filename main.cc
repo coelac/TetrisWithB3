@@ -137,12 +137,9 @@ int main(int argc, char* argv[]) {
       
       int multiplier = 1;
 
-<<<<<<< HEAD
 		//board1->testPrint();
       displayGame(board1, board2, currentPlayer->getPlayer());
 
-=======
->>>>>>> 723e9b595cb0f0b071feb88c601396abd217cc00
       if (cmd == "restart") {
         restart = true;
         //board1->reset();
