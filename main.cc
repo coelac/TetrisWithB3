@@ -204,7 +204,7 @@ int main(int argc, char* argv[]) {
       cout << (currentPlayer->getPlayer() == 1 ? "Player 1 wins" : "Player 2 wins!") << endl;
       return 0;
     }
-    
+    */
     bool needEffect = false;
 
     if (needEffect) {
@@ -221,18 +221,22 @@ int main(int argc, char* argv[]) {
       } else if (effect == "blind") {
         if (currentPlayer->getPlayer() == 1) {
           // apply on board2
+          
         } else {
           // apply on board1
+
         }
       } else if (effect == "heavy") {
         if (currentPlayer->getPlayer() == 1) {
           // apply on board2
+
         } else {
           // apply on board1
+
         }
       }
     }
-
+/*
     if (currentPlayer->getPlayer() == 1) {
       currentPlayer = board2;
     } else {

@@ -4,6 +4,7 @@
 #include <memory>
 #include <iostream>
 #include "abstractlevel.h"
+#include "abstractboard.h"
 #include "square.h"
 #include "jblock.h"
 #include "lblock.h"
@@ -17,7 +18,7 @@ using namespace std;
 
 class AbstractLevel;
 
-class Board {
+class Board : public AbstractBoard {
 public:
   int rows;
   int cols;
@@ -45,6 +46,9 @@ public:
   int turns;
   int score;
   int printPart;
+
+  bool isHeavy;
+  bool isBlind;
 
 public:
     Board(int player, int level, string levelFile);
@@ -82,6 +86,15 @@ public:
 
 
     void testPrint();
+
+
+    // Effects
+    void applyEffect(Board &board) override;
+    void setIsHeavy(bool heavy) { isHeavy = heavy; };
+    bool getIsHeavy() { return isHeavy; };
+
+    void setIsBlind(bool blind) { isBlind = blind; };
+    bool getIsBlind() { return isBlind; };
 };
 
 #endif

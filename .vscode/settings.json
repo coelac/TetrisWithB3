@@ -3,6 +3,7 @@
         "ostream": "cpp",
         "iostream": "cpp",
         "memory": "cpp",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "tuple": "cpp"
     }
 }
