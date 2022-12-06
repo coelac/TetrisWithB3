@@ -5,7 +5,7 @@
 
 using namespace std;
 
-Board::Board(int player, int level, string levelFile) : rows{18}, cols{11}, player{player}, levelNum{level}, level{nullptr}, newGame{true}, lost{false}, blockSize{4}, score{0}, levelFile{levelFile} {
+Board::Board(int player, int level, string levelFile) : rows{18}, cols{11}, player{player}, levelNum{level}, level{nullptr}, newGame{true}, lost{false}, blockSize{4}, score{0}, levelFile{levelFile}, printPart{0} {
   for (int i = 0; i < rows; ++i) {
     makeNewRow();
     blockPartsPerRow.push_back(0);
