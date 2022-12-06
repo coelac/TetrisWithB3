@@ -48,7 +48,7 @@ public:
 
 public:
     Board(int player, int level, string levelFile);
-    // ~Board();
+    ~Board();
     void printRow(int row); // NEW 
     int getPlayer();
     bool playerLost();

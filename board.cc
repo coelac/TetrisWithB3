@@ -10,6 +10,7 @@ Board::Board(int player, int level, string levelFile) : rows{18}, cols{11}, play
     makeNewRow();
     blockPartsPerRow.push_back(0);
   }
+  setLevel();
   makeNewBlock();
 }
 
@@ -173,7 +174,9 @@ int Board::getTurns() {
 
 void Board::makeNewBlock() {
   if (newGame) {
+    //cout << level->index << endl;
     nextBlockType = level->generateNextBlock();
+    //cout << nextBlockType << endl;
     newGame = false;
   }
   blockType = nextBlockType;
@@ -184,7 +187,8 @@ void Board::makeNewBlock() {
   } else {
     lost = true;
   }
-  nextBlockType = level->generateNextBlock();;
+  nextBlockType = level->generateNextBlock();
+  //nextBlockType = 'T';
 }
 
 bool Board::playerLost() {

@@ -7,23 +7,41 @@
 
 using namespace std;
 
-void printBlockRow(string block, int player) {
+void printBlockRow(char block, int player) {
+  string blockPrint = "";
+
+  if (block == 'I') {
+    blockPrint = "IIII            ";
+  } else if (block == 'L') {
+    blockPrint = "L    L    LL    ";
+  } else if (block == 'S') {
+    blockPrint = "SS    SS        ";
+  } else if (block == 'O') {
+    blockPrint = "OO   OO         ";
+  } else if (block == 'J') {
+    blockPrint = "     J   J  JJ  ";
+  } else if (block == 'Z') {
+    blockPrint = "ZZ    ZZ        ";
+  } else {
+    blockPrint = "TTT   T         ";
+  }
+
   if (player == 1) {
     int i = 0;
-    while (i <= 15) {
-      if (block.substr(i, 5) != "    \n") cout << block.substr(i, 5);
+    while (i <= 12) {
+      if (blockPrint.substr(i, 4) != "    \n") cout << blockPrint.substr(i, 5) << endl;
       i += 5;
     }
   } else {
     int i = 0;
     while (i <= 15) {
-      if (block.substr(i, 5) != "    \n") cout << "                      " << block.substr(i, 5);
-      i += 5;
+      if (blockPrint.substr(i, 4) != "    \n") cout << "                      " << blockPrint.substr(i, 4) << endl;
+      i += 4;
     }
   }
 }
 
-void displayGame(Board *b1, Board *b2, int player) {
+void displayGame(shared_ptr<Board> b1, shared_ptr<Board> b2, int player) {
   // Print Header
   cout << "Level:    " << b1->levelNum; // correct num of spaces???
   cout << "          "; // correct num of spaces???
@@ -37,6 +55,7 @@ void displayGame(Board *b1, Board *b2, int player) {
 
   for (int i = 17; i >= 0; --i) {
     b1->printRow(i);
+    cout << "                ";
     b2->printRow(i);
     cout << endl;
   }
@@ -47,9 +66,9 @@ void displayGame(Board *b1, Board *b2, int player) {
   cout << "Next:" << endl;
 
   if (player == 1) {
-    printBlockRow(b1->nextBlock->printBlock(), 1);
+    printBlockRow(b1->nextBlockType, player);
   } else {
-    printBlockRow(b2->nextBlock->printBlock(), 2);
+    printBlockRow(b2->nextBlockType, player);
   }
 }
 
@@ -100,16 +119,10 @@ int main(int argc, char* argv[]) {
   }
 
   // Setup
-  Board *board1 = new Board(1, gameLevel, player1File);
-  Board *board2 = new Board(2, gameLevel, player2File);
-
-  board1->setLevel();
-  board2->setLevel();
-
-  Board *currentPlayer = board1;
-
-  int numWins1 = 0;
-  int numWins2 = 0;
+  shared_ptr<Board> board1 = make_shared<Board>(1, gameLevel, player1File);
+  shared_ptr<Board> board2 = make_shared<Board>(2, gameLevel, player2File);
+  shared_ptr<Board> currentPlayer = board1;
+  shared_ptr<Board> otherPlayer = board2;
 
   // Gameloop
   while (true) {
@@ -131,8 +144,8 @@ int main(int argc, char* argv[]) {
       
       int multiplier = 1;
 
-		board1->testPrint();
-      //displayGame(board1, board2, currentPlayer->getPlayer());
+		//board1->testPrint();
+      displayGame(board1, board2, currentPlayer->getPlayer());
 
       if (cmd == "restart") {
         restart = true;
@@ -233,6 +246,10 @@ int main(int argc, char* argv[]) {
       currentPlayer = board1;
     }*/
   }
+
+  shared_ptr<Board> temp = currentPlayer;
+  currentPlayer = otherPlayer;
+  otherPlayer = temp;
 
   currentPlayer = nullptr;
 }
