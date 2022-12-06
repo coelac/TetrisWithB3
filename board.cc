@@ -20,12 +20,11 @@ int Board::getPlayer() {
 }
 
 void Board::printRow(int row) {
-	int partNum = 0;
 	for (int i = 0; i < cols; ++i) {
-		if (partNum < blockSize && currBlock->getYPos(partNum) == i &&
-				currBlock->getXPos(partNum) == i) {
+		if (printPart < blockSize && currBlock->getYPos(printPart) == row &&
+				currBlock->getXPos(printPart) == i) {
 			cout << blockType;
-			partNum += 1;
+			printPart = ((printPart + 1) % blockSize);
 		} else {
 			cout << board[row][i].print();
 		}
